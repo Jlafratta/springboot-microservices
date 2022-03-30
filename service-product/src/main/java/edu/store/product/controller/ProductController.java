@@ -14,7 +14,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/product")
-public class ProductController extends GenericController<Product, Long> implements CrudResponse<Product, Long> {
+public class ProductController extends GenericController<Product, Long> {
 
     @Autowired
     public ProductController(ProductService service) {
