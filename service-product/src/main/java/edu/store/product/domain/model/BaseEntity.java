@@ -1,6 +1,8 @@
 package edu.store.product.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.Hibernate;
@@ -11,7 +13,9 @@ import java.util.Date;
 
 @Getter
 @Setter
+@AllArgsConstructor @NoArgsConstructor
 @ToString
+@SuperBuilder
 @MappedSuperclass
 public abstract class BaseEntity {
 
@@ -20,13 +24,18 @@ public abstract class BaseEntity {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Builder.Default
     @Column(nullable = false, columnDefinition = "boolean default 1")
-    private Boolean enabled;
+    private Boolean enabled = true;
 
+    @Builder.Default
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, columnDefinition="datetime DEFAULT CURRENT_TIMESTAMP")
-    private Date creationDate;
+    private Date creationDate = new Date();
 
+    @Builder.Default
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, columnDefinition="datetime DEFAULT CURRENT_TIMESTAMP")

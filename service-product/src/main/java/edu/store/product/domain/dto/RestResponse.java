@@ -14,7 +14,9 @@ import java.util.List;
 public class RestResponse {
 
     private Object data;
-    private List<CustomError> errors;
+
+    @Builder.Default
+    private List<CustomError> errors = new ArrayList<>();
 
     public RestResponse() {
         this.errors = new ArrayList<>();
