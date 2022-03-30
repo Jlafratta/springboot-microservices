@@ -14,7 +14,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/category")
-public class CategoryController extends GenericController<Category, Long> implements CrudResponse<Category, Long> {
+public class CategoryController extends GenericController<Category, Long> {
 
     @Autowired
     public CategoryController(CategoryService categoryService) {
