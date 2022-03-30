@@ -1,6 +1,7 @@
 package edu.store.product.domain.model;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
@@ -11,7 +12,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @AllArgsConstructor @NoArgsConstructor
-@Builder
+@SuperBuilder
 @Entity
 @Table(name = "category")
 public class Category extends BaseEntity {
