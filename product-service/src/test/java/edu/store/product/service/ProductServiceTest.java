@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.util.List;
 
@@ -32,16 +33,20 @@ class ProductServiceTest {
         productService = new ProductService(productRepository);
         categoryMock = new CategoryMock();
         productMock = new ProductMock(categoryMock);
+
+        Category defaultCategory = categoryMock.getDefaultComplete();
+        List<Product> defaultListByCategory = productMock.getCompleteListDefaultCategory();
+
+        Mockito.when(productRepository.findByCategory(defaultCategory))
+                .thenReturn(defaultListByCategory);
     }
 
     @Test
-    void findByCategory() {
-        Category cat = categoryMock.getDefaultComplete();
-        when(productRepository.findByCategory(cat)).thenReturn(productMock.getCompleteListDefaultCategory());
+    void testFindByCategoryOk() {
+        Category defaultCategory = categoryMock.getDefaultComplete();
+        List<Product> products = productService.findByCategory(defaultCategory);
 
-        List<Product> products = productService.findByCategory(cat);
-
-        assertTrue(products.stream().allMatch(product -> product.getCategory().equals(cat)));
-        verify(productRepository, times(1)).findByCategory(cat);
+        assertTrue(products.stream().allMatch(product -> product.getCategory().equals(defaultCategory)));
+        verify(productRepository, times(1)).findByCategory(defaultCategory);
     }
 }
