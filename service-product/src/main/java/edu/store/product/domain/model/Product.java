@@ -2,6 +2,7 @@ package edu.store.product.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @AllArgsConstructor @NoArgsConstructor
-@Builder
+@SuperBuilder
 @Entity
 @Table(name = "product")
 public class Product extends BaseEntity {
